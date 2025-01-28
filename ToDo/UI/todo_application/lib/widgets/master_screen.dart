@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class MasterScreenWidget extends StatefulWidget {
   final Widget? child;
+  final Widget? floatingActionButton;
   final String? title;
+  
 
-  const MasterScreenWidget({super.key, this.child, this.title});
+  const MasterScreenWidget({super.key, this.child, this.floatingActionButton, this.title});
 
   @override
   State<MasterScreenWidget> createState() => _MasterScreenWidgetState();
@@ -31,6 +33,7 @@ class _MasterScreenWidgetState extends State<MasterScreenWidget> {
         ),
         centerTitle: false,
       ),
+      floatingActionButton: widget.floatingActionButton,
       body: widget.child!,
     );
   }

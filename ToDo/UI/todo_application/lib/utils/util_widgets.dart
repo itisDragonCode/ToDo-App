@@ -32,3 +32,10 @@ void alertBoxMoveBack(BuildContext context, String title, String content) {
             ],
           ));
 }
+
+Row rowMethod(Widget item, [CrossAxisAlignment? crossAxisAlignment]) {
+    return Row(
+      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
+      children: [item],
+    );
+  }
