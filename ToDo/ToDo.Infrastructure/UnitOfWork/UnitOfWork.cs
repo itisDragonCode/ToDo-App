@@ -10,7 +10,6 @@ namespace ToDo.Infrastructure
 
         public readonly IToDoItemsRepository ToDoItemsRepository;
 
-
         public UnitOfWork(
             DatabaseContext databaseContext, IToDoItemsRepository toDoItemsRepository)
         {

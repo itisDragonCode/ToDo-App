@@ -48,7 +48,7 @@ namespace ToDo.Application
 
         public virtual async Task<TDto> AddAsync(TUpsertDto dto, CancellationToken cancellationToken = default)
         {
-            //await ValidateAsync(dto, cancellationToken);
+            await ValidateAsync(dto, cancellationToken);
 
             var entity = Mapper.Map<TEntity>(dto);
             await CurrentRepository.AddAsync(entity, cancellationToken);

@@ -3,7 +3,6 @@
 using ToDo.Core;
 using ToDo.Application.Interfaces;
 using ToDo.Infrastructure.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 
 namespace ToDo.Api.Controllers
 {

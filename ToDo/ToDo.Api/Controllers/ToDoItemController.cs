@@ -12,6 +12,20 @@ namespace ToDo.Api.Controllers
         public ToDoItemController(IToDoItemsService service, ILogger<ToDoItemController> logger) : base(service, logger)
         {
         }
-       
+
+        [HttpPut("ChangeDoneStatus/{todoId}")]
+        public async Task<IActionResult> ChangeDoneStatus(int todoId, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                await Service.ChangeDoneStatus(todoId, cancellationToken);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message, e?.InnerException);
+            }
+        }
     }
 }
