@@ -14,5 +14,20 @@ namespace ToDo.Application
         {
 
         }
+
+        public async Task ChangeDoneStatus(int notificationId, CancellationToken cancellationToken = default)
+        {
+            var toDoItem = await CurrentRepository.GetByIdAsync(notificationId);
+
+            if (toDoItem == null)
+                throw new Exception("To Do item not found");
+
+            toDoItem.IsDone = !toDoItem.IsDone;
+
+            CurrentRepository.Update(toDoItem);
+            await UnitOfWork.SaveChangesAsync();
+
+
+        }
     }
 }
