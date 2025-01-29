@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:provider/provider.dart';
 import 'package:todo_application/models/search_result.dart';
 import 'package:todo_application/models/to_do_item.dart';
 import 'package:todo_application/providers/to_do_item_provider.dart';
 import 'package:todo_application/utils/util.dart';
 import 'package:todo_application/utils/util_widgets.dart';
-import 'package:todo_application/widgets/master_screen.dart';
 
 class TodoDetailsPage extends StatefulWidget {
   const TodoDetailsPage({super.key, this.todoItem});
@@ -75,7 +73,7 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
             initialValue: _initialValue,
             key: _formKey,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(45, 20, 45, 20),
+              padding: const EdgeInsets.fromLTRB(45, 40, 45, 20),
               child: Card(
                 elevation: 4,
                 child: Padding(
@@ -109,49 +107,52 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          IconButton(onPressed: (){
-                               showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) =>
-                                                AlertDialog(
-                                                  title: Text(
-                                                      "Deleting Task"),
-                                                  content: Text(
-                                                     "Are you sure that you want to delete this task?"),
-                                                  actions: [
-                                                    TextButton(
-                                                        onPressed: (() {
-                                                          Navigator.pop(context);
-                                                        }),
-                                                        child: Text(
-                                                            "Cancel")),
-                                                    TextButton(
-                                                        onPressed: () async {
-                                                          try {
-                                                            await _toDoItemProvider
-                                                                .remove(widget
-                                                                        .todoItem?.id ??
-                                                                    0);
-                
-                                                            ScaffoldMessenger.of(
-                                                                    context)
-                                                                .showSnackBar(SnackBar(
-                                                                    content: Text("Task successfully delte"
-                                                                       )));
+                          Visibility(
+                            visible: widget.todoItem != null,
+                            child: IconButton(onPressed: (){
+                                 showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) =>
+                                                  AlertDialog(
+                                                    title: Text(
+                                                        "Deleting Task"),
+                                                    content: Text(
+                                                       "Are you sure that you want to delete this task?"),
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: (() {
                                                             Navigator.pop(context);
-                                                            Navigator.pop(
-                                                                context, 'reload');
-                                                          } catch (e) {
-                                                            alertBoxMoveBack(
-                                                                context,
-                                                                "Error",
-                                                                e.toString());
-                                                          }
-                                                        },
-                                                        child: const Text('Ok')),
-                                                  ],
-                                                ));
-                          }, icon: Icon(Icons.delete), color: Colors.red,),
+                                                          }),
+                                                          child: Text(
+                                                              "Cancel")),
+                                                      TextButton(
+                                                          onPressed: () async {
+                                                            try {
+                                                              await _toDoItemProvider
+                                                                  .remove(widget
+                                                                          .todoItem?.id ??
+                                                                      0);
+                                            
+                                                              ScaffoldMessenger.of(
+                                                                      context)
+                                                                  .showSnackBar(SnackBar(
+                                                                      content: Text("Task successfully deleted"
+                                                                         )));
+                                                              Navigator.pop(context);
+                                                              Navigator.pop(
+                                                                  context, 'reload');
+                                                            } catch (e) {
+                                                              alertBoxMoveBack(
+                                                                  context,
+                                                                  "Error",
+                                                                  e.toString());
+                                                            }
+                                                          },
+                                                          child: const Text('Ok')),
+                                                    ],
+                                                  ));
+                            }, icon: Icon(Icons.delete), color: Colors.red,),
+                          ),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.lightBlue,
@@ -209,9 +210,6 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                               ))
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      )
                     ],
                   ),
                 ),
@@ -230,7 +228,7 @@ Expanded _textField(String name, String label) {
       name: name,
       validator: ((value) {
         if (value == null || value.isEmpty) {
-          return "Morate unijeti vrijednost";
+          return "Value is mandatory";
         } else {
           return null;
         }

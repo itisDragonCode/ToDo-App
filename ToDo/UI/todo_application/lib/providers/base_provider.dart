@@ -155,7 +155,7 @@ String getQueryString(Map params,
       }
       query += '$prefix$key=$encoded';
     } else if (value is DateTime) {
-      query += '$prefix$key=${(value as DateTime).toIso8601String()}';
+      query += '$prefix$key=${(value).toIso8601String()}';
     } else if (value is List || value is Map) {
       if (value is List) value = value.asMap();
       value.forEach((k, v) {

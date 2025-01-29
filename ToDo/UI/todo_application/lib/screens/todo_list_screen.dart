@@ -18,7 +18,7 @@ class TodoListScreen extends StatefulWidget {
 
 class _TodoListScreenState extends State<TodoListScreen> {
   late ToDoItemProvider _toDoItemProvider = ToDoItemProvider();
-  TextEditingController _valueController = TextEditingController();
+  final TextEditingController _valueController = TextEditingController();
 
   SearchResult<ToDoItem>? result;
 
