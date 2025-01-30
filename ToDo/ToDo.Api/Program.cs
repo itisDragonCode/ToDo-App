@@ -9,6 +9,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+var kestrelHost = Environment.GetEnvironmentVariable("Host_Type");
+
+if (kestrelHost != null)
+{
+    builder.WebHost.ConfigureKestrel(config =>
+    {
+        config.ListenAnyIP(5002);
+    });
+}
+
 var connectionStringConfig = builder.BindConfig<ConnectionStringConfig>("ConnectionStrings");
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 

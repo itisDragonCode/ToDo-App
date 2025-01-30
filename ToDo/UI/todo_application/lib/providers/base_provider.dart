@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import '../models/search_result.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -8,11 +7,14 @@ import 'package:http/http.dart';
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? baseUrl;
   String endpoint = "api/";
+  //String defUrl = "http://10.0.2.2:5227/";
+  String defUrl = "http://192.168.0.28/:5002/";
+
 
   BaseProvider(String point) {
     endpoint += point;
-    baseUrl = const String.fromEnvironment("baseUrl",
-        defaultValue: "http://10.0.2.2:5227/");
+    baseUrl = String.fromEnvironment("baseUrl",
+        defaultValue: defUrl);
   }
 
   Future<SearchResult<T>> getPaged({dynamic filter}) async {
@@ -104,7 +106,6 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
     Response response = await get(uri, headers: headers);
     if (isValidResponse(response)) {
-
       var data = jsonDecode(response.body);
 
       return fromJson(data);
