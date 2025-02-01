@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:todo_application/models/search_result.dart';
 import 'package:todo_application/models/to_do_item.dart';
 import 'package:todo_application/providers/to_do_item_provider.dart';
 import 'package:todo_application/utils/util.dart';
@@ -20,7 +19,6 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
   late ToDoItemProvider _toDoItemProvider = ToDoItemProvider();
   Map<String, dynamic> _initialValue = {};
 
-  SearchResult<ToDoItem>? result;
   bool isLoading = false;
 
   @override
@@ -63,7 +61,7 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
         ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
-          widget.todoItem != null ? "Add Task" : "Edit Task",
+          widget.todoItem != null ? "Edit Task" : "Add Task", 
           style: TextStyle(color: Colors.white),
         ),
       ),
