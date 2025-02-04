@@ -2,7 +2,6 @@
 using ToDo.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
 
 namespace ToDo.Infrastructure
 {
