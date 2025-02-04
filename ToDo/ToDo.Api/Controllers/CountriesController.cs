@@ -3,6 +3,8 @@ using ToDo.Application.Interfaces;
 using ToDo.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using ToDo.Api.Utilities;
 
 namespace ToDo.Api.Controllers
 {
@@ -10,6 +12,12 @@ namespace ToDo.Api.Controllers
     {
         public CountriesController(ICountriesService service, ILogger<CountriesController> logger) : base(service, logger)
         {
+        }
+
+        [Authorization(Role.Administrator)]
+        public override Task<IActionResult> Post([FromBody] CountryUpsertDto upsertDto, CancellationToken cancellationToken = default)
+        {
+            return base.Post(upsertDto, cancellationToken);
         }
 
         [AllowAnonymous]
