@@ -3,9 +3,11 @@
 using ToDo.Core;
 using ToDo.Application.Interfaces;
 using ToDo.Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ToDo.Api.Controllers
 {
+    [Authorize]
     public abstract class BaseCrudController<TDto, TUpsertDto, TSearchObject, TService> : BaseController
         where TDto : BaseDto
         where TUpsertDto : BaseUpsertDto

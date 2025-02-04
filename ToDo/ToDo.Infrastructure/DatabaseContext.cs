@@ -10,6 +10,9 @@ namespace ToDo.Infrastructure
 
         //Entities
         public DbSet<ToDoItem> ToDoItems { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Photo> Photos { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
