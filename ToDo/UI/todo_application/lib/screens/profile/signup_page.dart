@@ -53,7 +53,7 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       appBar: AppBar(title: Text("Sign up"), centerTitle: true),
       body: isLoading
-          ? const SpinKitRing(color: Colors.brown)
+          ? const SpinKitRing(color: Colors.blue)
           : SingleChildScrollView(
               child: FormBuilder(
                 key: _formKey,

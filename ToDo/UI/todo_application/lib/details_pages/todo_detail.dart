@@ -170,6 +170,8 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
 
                                       request['isDone'] = false;
 
+                                      request['userId'] = Autentification.loggedUser?.id;
+
                                       await _toDoItemProvider.update(request);
 
                                       ScaffoldMessenger.of(context)
@@ -186,6 +188,8 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                                           .currentState?.value['dueDate']);
 
                                       request['isDone'] = false;
+
+                                      request['userId'] = Autentification.loggedUser?.id;
 
                                       await _toDoItemProvider.insert(request);
 

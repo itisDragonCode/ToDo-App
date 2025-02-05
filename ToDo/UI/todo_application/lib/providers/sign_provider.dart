@@ -6,12 +6,10 @@ import 'package:http/http.dart';
 class SignProvider extends ChangeNotifier {
   static String? _baseUrl;
   String _endpoint = "api/Access/SignIn";
-  //String defUrl = "http://10.0.2.2:5227/";
-  String defUrl = "http://192.168.0.28/:5002/";
 
   SignProvider() {
     _baseUrl = String.fromEnvironment("baseUrl",
-        defaultValue: defUrl);
+        defaultValue: "http://10.0.2.2:5227/");
   }
 
   Future<dynamic> signIn(String em, String ps) async {

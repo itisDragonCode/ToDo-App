@@ -42,7 +42,11 @@ class User {
       this.profilePhotoId,
       this.isActive);
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  //factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  factory User.fromJson(Map<String, dynamic> json) =>_$UserFromJson(json);
+
+  
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }

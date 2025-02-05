@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 40,
                 ),
                 isLoading
-                    ? const SpinKitRing(color: Colors.brown)
+                    ? const SpinKitRing(color: Colors.lightBlue)
                     : ElevatedButton(
                         onPressed: () async {
                           if (mounted) {
@@ -108,9 +108,8 @@ class _LoginPageState extends State<LoginPage> {
                             } else {
                               int userId = int.parse(
                                   Autentification.tokenDecoded!['Id']);
-                              loggedUser = await _userProvider.getById(userId);
-
-                              print(loggedUser);
+                                  
+                              Autentification.loggedUser = await _userProvider.getById(userId);
 
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(builder: (context) {

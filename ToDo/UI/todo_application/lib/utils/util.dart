@@ -6,6 +6,7 @@ import 'package:todo_application/models/user.dart';
 class Autentification {
   static String? token;
   static Map? tokenDecoded;
+  static User? loggedUser;
 }
 
 dynamic dateEncode(dynamic item) {
@@ -24,5 +25,3 @@ Image imageFromBase64String(String base64Image) {
 }
 
 const String mfield = "Field is mandatory";
-
-User? loggedUser;
