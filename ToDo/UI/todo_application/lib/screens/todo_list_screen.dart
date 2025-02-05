@@ -34,7 +34,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Future<void> initData() async {
     try {
       result = await _toDoItemProvider.getPaged(
-          filter: {'title': _valueController.text, 'pageSize': 100000});
+          filter: {'title': _valueController.text, 'userId': 4, 'pageSize': 100000});
       if (mounted) {
         setState(() {
           isLoading = false;
