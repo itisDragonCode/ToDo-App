@@ -1,6 +1,7 @@
+import 'package:todo_application/menus/todo_menu_page.dart';
+import 'package:todo_application/providers/photo_provider.dart';
 import 'package:todo_application/providers/sign_provider.dart';
 import 'package:todo_application/providers/user_provider.dart';
-import 'package:todo_application/screens/todo_list_screen.dart';
 import 'package:todo_application/utils/util.dart';
 import 'package:todo_application/utils/util_widgets.dart';
 
@@ -24,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
   late SignProvider _signProvider = SignProvider();
   late UserProvider _userProvider = UserProvider();
+  late PhotoProvider _photoProvider = PhotoProvider();
 
   bool isLoading = false;
 
@@ -32,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     super.didChangeDependencies();
     _signProvider = context.read<SignProvider>();
     _userProvider = context.read<UserProvider>();
+    _photoProvider = context.read<PhotoProvider>();
   }
 
   @override
@@ -48,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 25,
                 ),
                 const Text(
-                  'To Do',
+                  'To Do List',
                   style: TextStyle(
                       color: Colors.lightBlue,
                       fontSize: 45,
@@ -108,12 +111,21 @@ class _LoginPageState extends State<LoginPage> {
                             } else {
                               int userId = int.parse(
                                   Autentification.tokenDecoded!['Id']);
-                                  
-                              Autentification.loggedUser = await _userProvider.getById(userId);
+
+                              Autentification.loggedUser =
+                                  await _userProvider.getById(userId);
+
+                              if (Autentification.loggedUser?.profilePhotoId !=
+                                  null) {
+                                profilePhoto = await _photoProvider.getById(
+                                    Autentification
+                                            .loggedUser?.profilePhotoId ??
+                                        0);
+                              }
 
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(builder: (context) {
-                                return const TodoListScreen();
+                                return const ToDoMenuPage();
                               }));
 
                               if (mounted) {

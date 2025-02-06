@@ -148,7 +148,7 @@ class _SignupPageState extends State<SignupPage> {
                           rowMethod(
                             Expanded(
                                 child: FormBuilderDropdown<String>(
-                              name: 'genderId',
+                              name: 'gender',
                               validator: (value) {
                                 if (value == null) {
                                   return mfield;
@@ -164,15 +164,16 @@ class _SignupPageState extends State<SignupPage> {
                                     _formKey
                                         .currentState!
                                         .fields[
-                                            'genderId'] //brisnje selekcije iz forme
+                                            'gender'] //brisnje selekcije iz forme
                                         ?.reset();
                                   },
                                 ),
                               ),
                               items: Gender.values.map((Gender gender) {
                                 return DropdownMenuItem<String>(
-                                    value: gender.toString(),
-                                    child: Text(gender.toString()));
+                                    value: gender.index.toString(),
+                                    child: Text(
+                                        gender.toString().split('.').last));
                               }).toList(),
                             )),
                           ),
@@ -232,7 +233,7 @@ class _SignupPageState extends State<SignupPage> {
 
                                         request['isActive'] = true;
 
-                                        request['role'] = Role.user;
+                                        request['role'] = Role.user.index;
 
                                         await _signProvider.signUp(request);
 

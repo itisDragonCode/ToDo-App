@@ -15,6 +15,7 @@ namespace ToDo.Infrastructure
             return await DbSet.Where(c => searchObject.IsDone == null || c.IsDone == searchObject.IsDone)
                 .Where(c => searchObject.Title == null || c.Title.ToLower().Contains(searchObject.Title.ToLower()))
                 .Where(c => searchObject.UserId == null || c.UserId == searchObject.UserId)
+                .OrderBy(c=> c.IsDone)
                  .ToPagedListAsync(searchObject, cancellationToken);
         }
 

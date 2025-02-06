@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:todo_application/menus/todo_menu_page.dart';
 import 'package:todo_application/models/to_do_item.dart';
 import 'package:todo_application/providers/to_do_item_provider.dart';
+import 'package:todo_application/screens/todo_list_screen.dart';
 import 'package:todo_application/utils/util.dart';
 import 'package:todo_application/utils/util_widgets.dart';
+import 'package:todo_application/widgets/master_screen.dart';
 
 class TodoDetailsPage extends StatefulWidget {
   const TodoDetailsPage({super.key, this.todoItem});
@@ -47,25 +50,9 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context); // Pop the current screen and go back
-          },
-        ),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(
-          widget.todoItem != null ? "Edit Task" : "Add Task", 
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-      body: Center(
+    return MasterScreenWidget(
+      title: widget.todoItem != null ? "Edit Task" : "Add Task",
+      child: Center(
         child: SingleChildScrollView(
           child: FormBuilder(
             initialValue: _initialValue,
@@ -78,9 +65,6 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-                      // const SizedBox(
-                      //   height: 60,
-                      // ),
                       rowMethod(_textField('title', "Title")),
                       const SizedBox(
                         height: 25,
@@ -107,49 +91,56 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                         children: [
                           Visibility(
                             visible: widget.todoItem != null,
-                            child: IconButton(onPressed: (){
-                                 showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) =>
-                                                  AlertDialog(
-                                                    title: Text(
-                                                        "Deleting Task"),
-                                                    content: Text(
-                                                       "Are you sure that you want to delete this task?"),
-                                                    actions: [
-                                                      TextButton(
-                                                          onPressed: (() {
-                                                            Navigator.pop(context);
-                                                          }),
-                                                          child: Text(
-                                                              "Cancel")),
-                                                      TextButton(
-                                                          onPressed: () async {
-                                                            try {
-                                                              await _toDoItemProvider
-                                                                  .remove(widget
-                                                                          .todoItem?.id ??
-                                                                      0);
-                                            
-                                                              ScaffoldMessenger.of(
-                                                                      context)
-                                                                  .showSnackBar(SnackBar(
-                                                                      content: Text("Task successfully deleted"
-                                                                         )));
-                                                              Navigator.pop(context);
-                                                              Navigator.pop(
-                                                                  context, 'reload');
-                                                            } catch (e) {
-                                                              alertBoxMoveBack(
-                                                                  context,
-                                                                  "Error",
-                                                                  e.toString());
-                                                            }
-                                                          },
-                                                          child: const Text('Ok')),
-                                                    ],
-                                                  ));
-                            }, icon: Icon(Icons.delete), color: Colors.red,),
+                            child: IconButton(
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                          title: Text("Deleting Task"),
+                                          content: Text(
+                                              "Are you sure that you want to delete this task?"),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: (() {
+                                                  Navigator.pop(context);
+                                                }),
+                                                child: Text("Cancel")),
+                                            TextButton(
+                                                onPressed: () async {
+                                                  try {
+                                                    await _toDoItemProvider
+                                                        .remove(widget
+                                                                .todoItem?.id ??
+                                                            0);
+
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                "Task successfully deleted")));
+
+                                                    Navigator.pop(context);
+                                                    Navigator.pop(context);
+                                                    Navigator.of(context)
+                                                        .pushReplacement(
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) {
+                                                      return ToDoMenuPage();
+                                                    }));
+                                                  } catch (e) {
+                                                    alertBoxMoveBack(context,
+                                                        "Error", e.toString());
+                                                  }
+                                                },
+                                                child: const Text('Ok')),
+                                          ],
+                                        ));
+                              },
+                              icon: Icon(Icons.delete),
+                              color: Colors.red,
+                            ),
                           ),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -170,7 +161,8 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
 
                                       request['isDone'] = false;
 
-                                      request['userId'] = Autentification.loggedUser?.id;
+                                      request['userId'] =
+                                          Autentification.loggedUser?.id;
 
                                       await _toDoItemProvider.update(request);
 
@@ -179,7 +171,11 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                                               content: Text(
                                                   "Task successfully modified")));
 
-                                      Navigator.pop(context, 'reload');
+                                      Navigator.pop(context);
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(builder: (context) {
+                                        return ToDoMenuPage();
+                                      }));
                                     } else {
                                       Map<String, dynamic> request =
                                           Map.of(_formKey.currentState!.value);
@@ -189,7 +185,8 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
 
                                       request['isDone'] = false;
 
-                                      request['userId'] = Autentification.loggedUser?.id;
+                                      request['userId'] =
+                                          Autentification.loggedUser?.id;
 
                                       await _toDoItemProvider.insert(request);
 
@@ -198,7 +195,11 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                                               content: Text(
                                                   "Task successfully added")));
 
-                                      Navigator.pop(context, 'reload');
+                                      Navigator.pop(context);
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(builder: (context) {
+                                        return ToDoMenuPage();
+                                      }));
                                     }
                                   } else {}
                                 } catch (e) {
