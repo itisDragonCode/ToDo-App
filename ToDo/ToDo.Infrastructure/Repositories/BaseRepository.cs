@@ -2,6 +2,7 @@
 using ToDo.Core;
 using ToDo.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
 
 namespace ToDo.Infrastructure
 {
@@ -11,6 +12,7 @@ namespace ToDo.Infrastructure
     {
         protected readonly DatabaseContext DatabaseContext;
         protected readonly DbSet<TEntity> DbSet;
+        public DbConnection DbConnection => DatabaseContext.Database.GetDbConnection(); 
 
         protected BaseRepository(DatabaseContext databaseContext)
         {

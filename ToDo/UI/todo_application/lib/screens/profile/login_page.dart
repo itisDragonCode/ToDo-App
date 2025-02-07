@@ -1,3 +1,4 @@
+import 'package:todo_application/menus/main_menu.dart';
 import 'package:todo_application/menus/todo_menu_page.dart';
 import 'package:todo_application/providers/photo_provider.dart';
 import 'package:todo_application/providers/sign_provider.dart';
@@ -125,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
 
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(builder: (context) {
-                                return const ToDoMenuPage();
+                                return const MainMenuPage();
                               }));
 
                               if (mounted) {

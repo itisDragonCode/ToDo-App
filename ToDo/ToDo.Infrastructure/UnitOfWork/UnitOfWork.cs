@@ -12,9 +12,12 @@ namespace ToDo.Infrastructure
         public readonly IPhotosRepository PhotosRepository;
         public readonly IToDoItemsRepository ToDoItemsRepository;
         public readonly IUsersRepository UsersRepository;
+        public readonly IQuizzesRepository QuizsRepository;
+        public readonly IQuestionsRepository QuestionsRepository;
+        public readonly IAnswersRepository AnswersRepository;
 
         public UnitOfWork(
-            DatabaseContext databaseContext, IToDoItemsRepository toDoItemsRepository, ICountriesRepository countriesRepository, IPhotosRepository photosRepository, IUsersRepository usersRepository)
+            DatabaseContext databaseContext, IToDoItemsRepository toDoItemsRepository, ICountriesRepository countriesRepository, IPhotosRepository photosRepository, IUsersRepository usersRepository, IQuizzesRepository quizsRepository, IQuestionsRepository questionsRepository, IAnswersRepository answersRepository)
         {
             _databaseContext = databaseContext;
 
@@ -22,6 +25,9 @@ namespace ToDo.Infrastructure
             CountriesRepository = countriesRepository;
             PhotosRepository = photosRepository;
             UsersRepository = usersRepository;
+            QuizsRepository = quizsRepository;
+            QuestionsRepository = questionsRepository;
+            AnswersRepository = answersRepository;
         }
 
         public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)

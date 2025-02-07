@@ -14,6 +14,9 @@ namespace ToDo.Application
             services.AddScoped<ICountriesService, CountriesService>();
             services.AddScoped<IPhotosService, PhotosService>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IQuizzesService, QuizsService>();
+            services.AddScoped<IQuestionsService, QuestionsService>();
+            services.AddScoped<IAnswersService, AnswersService>();
         }
 
         public static void AddValidators(this IServiceCollection services)
@@ -23,7 +26,9 @@ namespace ToDo.Application
             services.AddScoped<IValidator<PhotoUpsertDto>, PhotoValidator>();
             services.AddScoped<IValidator<UserUpsertDto>, UserValidator>();
             services.AddScoped<IValidator<UserChangePasswordDto>, UserPasswordValidator>();
-
+            services.AddScoped<IValidator<QuizUpsertDto>, QuizValidator>();
+            services.AddScoped<IValidator<QuestionUpsertDto>, QuestionValidator>();
+            services.AddScoped<IValidator<AnswerUpsertDto>, AnswerValidator>();
         }
     }
 }

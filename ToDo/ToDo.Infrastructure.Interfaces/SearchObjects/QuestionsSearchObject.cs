@@ -1,0 +1,10 @@
+﻿namespace ToDo.Infrastructure.Interfaces
+{
+    public class QuestionsSearchObject : BaseSearchObject
+    {
+        public string? Content { get; set; }
+        public int? Points { get; set; }
+        public int? QuizId { get; set; }
+        public bool? IsActive { get; set; }
+    }
+}

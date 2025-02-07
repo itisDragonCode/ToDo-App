@@ -11,6 +11,9 @@ namespace ToDo.Infrastructure
             services.AddScoped<ICountriesRepository, CountriesRepository>();
             services.AddScoped<IPhotosRepository, PhotosRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IQuizzesRepository, QuizsRepository>();
+            services.AddScoped<IQuestionsRepository, QuestionsRepository>();
+            services.AddScoped<IAnswersRepository, AnswersRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
