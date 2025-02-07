@@ -60,7 +60,7 @@ namespace ToDo.Application
 
             await ValidateAsync(dto, cancellationToken);
 
-            var user = await CurrentRepository.GetByIdAsync(dto.Id.Value, cancellationToken);// uvjeka await koristiti
+            var user = await CurrentRepository.GetByIdAsync(dto.Id.Value, cancellationToken);
 
             if (user == null)
                 throw new UserNotFoundException();
@@ -74,7 +74,7 @@ namespace ToDo.Application
                 user.PasswordSalt = _cryptoService.GenerateSalt();
                 user.PasswordHash = _cryptoService.GenerateHash(dto.Password, user.PasswordSalt);
             }
-            if (dto.ProfilePhoto == null && exsistringProfilePhotoId > 0)// ne može se null dodsjeliti 0
+            if (dto.ProfilePhoto == null && exsistringProfilePhotoId > 0)
             {
                 user.ProfilePhotoId = exsistringProfilePhotoId;
             }
@@ -109,7 +109,7 @@ namespace ToDo.Application
 
         public async Task ChangePasswordAsync(UserChangePasswordDto dto, CancellationToken cancellationToken = default)
         {
-            await _passwordValidator.ValidateAsync(dto, cancellationToken); //nisi bio dodao validator u registry
+            await _passwordValidator.ValidateAsync(dto, cancellationToken); 
 
             var user = await CurrentRepository.GetByIdAsync(dto.Id, cancellationToken);
 
