@@ -4,9 +4,9 @@ class MasterScreenWidget extends StatefulWidget {
   final Widget? child;
   final Widget? floatingActionButton;
   final String? title;
-  
 
-  const MasterScreenWidget({super.key, this.child, this.floatingActionButton, this.title});
+  const MasterScreenWidget(
+      {super.key, this.child, this.floatingActionButton, this.title});
 
   @override
   State<MasterScreenWidget> createState() => _MasterScreenWidgetState();
@@ -27,15 +27,23 @@ class _MasterScreenWidgetState extends State<MasterScreenWidget> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
           widget.title ?? "",
-          style: TextStyle(
-            color: Colors.white
-          ),
+          style: TextStyle(color: Colors.white),
         ),
-        centerTitle: false,
+        centerTitle: true,
+        leading: IconButton(
+            onPressed: (() {
+              if (!ModalRoute.of(context)!.isFirst) {
+                Navigator.pop(context,
+                    'reload2'); // provjerava da li je prva ruta da se izbjegne prazana rpoute stack
+              }
+            }),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
       ),
       floatingActionButton: widget.floatingActionButton,
       body: widget.child!,
     );
   }
-  
 }

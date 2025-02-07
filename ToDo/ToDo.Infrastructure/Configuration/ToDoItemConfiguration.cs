@@ -21,5 +21,10 @@ public class ToDoItemConfiguration : BaseConfiguration<ToDoItem>
 
         builder.Property(ac => ac.IsDeleted)
                .IsRequired();
+
+        builder.HasOne(e => e.User)
+                 .WithMany(e => e.ToDoItems)
+                 .HasForeignKey(e => e.UserId)
+                 .IsRequired();
     }
 }

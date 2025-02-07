@@ -8,6 +8,9 @@ namespace ToDo.Infrastructure
         public static void AddInfrastructure(this IServiceCollection services)
         {
             services.AddScoped<IToDoItemsRepository, ToDoItemsRepository>();
+            services.AddScoped<ICountriesRepository, CountriesRepository>();
+            services.AddScoped<IPhotosRepository, PhotosRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

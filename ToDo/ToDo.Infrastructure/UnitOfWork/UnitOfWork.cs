@@ -8,14 +8,20 @@ namespace ToDo.Infrastructure
     {
         private readonly DatabaseContext _databaseContext;
 
+        public readonly ICountriesRepository CountriesRepository;
+        public readonly IPhotosRepository PhotosRepository;
         public readonly IToDoItemsRepository ToDoItemsRepository;
+        public readonly IUsersRepository UsersRepository;
 
         public UnitOfWork(
-            DatabaseContext databaseContext, IToDoItemsRepository toDoItemsRepository)
+            DatabaseContext databaseContext, IToDoItemsRepository toDoItemsRepository, ICountriesRepository countriesRepository, IPhotosRepository photosRepository, IUsersRepository usersRepository)
         {
             _databaseContext = databaseContext;
 
             ToDoItemsRepository = toDoItemsRepository;
+            CountriesRepository = countriesRepository;
+            PhotosRepository = photosRepository;
+            UsersRepository = usersRepository;
         }
 
         public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)

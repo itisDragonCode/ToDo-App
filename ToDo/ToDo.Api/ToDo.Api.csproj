@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ToDo.Application\ToDo.Application.csproj" />
+    <ProjectReference Include="..\ToDo.Common.Services\ToDo.Common.Services.csproj" />
     <ProjectReference Include="..\ToDo.Core\ToDo.Core.csproj" />
   </ItemGroup>
 

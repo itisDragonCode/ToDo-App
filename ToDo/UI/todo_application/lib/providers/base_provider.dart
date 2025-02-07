@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:todo_application/utils/util.dart';
 
 import '../models/search_result.dart';
 import 'package:flutter/material.dart';
@@ -130,8 +130,12 @@ bool isValidResponse(Response response) {
 }
 
 Map<String, String> createHeaders() {
-  var headers = {"Content-Type": "application/json"};
+  String jwt = Autentification.token ?? '';
 
+  String jwtAuth = "Bearer $jwt";
+
+  var headers = {"Content-Type": "application/json", "Authorization": jwtAuth};
+  
   return headers;
 }
 
