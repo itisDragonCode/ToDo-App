@@ -8,7 +8,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
   static String? baseUrl;
   String endpoint = "api/";
   //String defUrl = "http://10.0.2.2:5227/";
-  String defUrl = "http://192.168.0.28/:5002/";
+  String defUrl = "http://192.168.0.28:5002/";
 
 
   BaseProvider(String point) {
