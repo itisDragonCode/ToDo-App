@@ -23,6 +23,7 @@ namespace ToDo.Core
         public Country Country { get; set; } = null!;
 
         public ICollection<ToDoItem> ToDoItems { get; set; } = null!;
+        public ICollection<UserQuiz> Quizzes { get; set; } = null!;
 
     }
 }

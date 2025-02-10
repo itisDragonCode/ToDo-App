@@ -27,6 +27,21 @@ namespace ToDo.Api.Controllers
             }
         }
 
+        [HttpGet("GetQuizTotalPoints")]
+        public async Task<IActionResult> GetQuizTotalPoints(int quizId, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var quizTotalPoints = await Service.GetQuizTotalPoints(quizId, cancellationToken);
+                return Ok(quizTotalPoints);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message, e?.InnerException);
+            }
+        }
+
         [HttpPost("SeedQuizData")]
         public async Task<IActionResult> SeedQuizData(CancellationToken cancellationToken = default)
         {

@@ -24,6 +24,11 @@ namespace ToDo.Application
             return Mapper.Map<PagedList<QuizDto>>(activeQuizzes);
         }
 
+        public async Task<int> GetQuizTotalPoints(int quizId, CancellationToken cancellationToken = default)
+        {
+            return await CurrentRepository.GetQuizTotalPoints(quizId, cancellationToken);
+        }
+
         public async Task<string> SeedQuizData(CancellationToken cancellationToken = default)
         {
             var seedResult = await CurrentRepository.SeedQuizData();

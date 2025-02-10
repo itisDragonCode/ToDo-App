@@ -14,6 +14,7 @@ namespace ToDo.Infrastructure
             services.AddScoped<IQuizzesRepository, QuizsRepository>();
             services.AddScoped<IQuestionsRepository, QuestionsRepository>();
             services.AddScoped<IAnswersRepository, AnswersRepository>();
+            services.AddScoped<IUserQuizsRepository, UserQuizsRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

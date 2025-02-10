@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_application/details_pages/todo_detail.dart';
-import 'package:todo_application/screens/profile/login_page.dart';
 import 'package:todo_application/screens/profile/profile_page.dart';
 import 'package:todo_application/screens/todo_list_screen.dart';
-import 'package:todo_application/utils/util.dart';
-import 'package:todo_application/utils/util_widgets.dart';
 
 class ToDoMenuPage extends StatefulWidget {
   const ToDoMenuPage({super.key});
@@ -30,6 +27,9 @@ class _ToDoMenuPageState extends State<ToDoMenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+         iconTheme: IconThemeData(
+          color: Colors.white
+        ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
           titles[_selectedIndex],

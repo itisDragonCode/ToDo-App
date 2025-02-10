@@ -1,5 +1,4 @@
 import 'package:todo_application/menus/main_menu.dart';
-import 'package:todo_application/menus/todo_menu_page.dart';
 import 'package:todo_application/providers/photo_provider.dart';
 import 'package:todo_application/providers/sign_provider.dart';
 import 'package:todo_application/providers/user_provider.dart';
@@ -91,6 +90,13 @@ class _LoginPageState extends State<LoginPage> {
 
                           var email = _emailController.text;
                           var password = _passwordController.text;
+
+                          // for debug to speed up
+                          if(true)
+                          {
+                            email = "erik@gmail.com";
+                            password = "Password9";
+                          }
 
                           try {
                             var data =

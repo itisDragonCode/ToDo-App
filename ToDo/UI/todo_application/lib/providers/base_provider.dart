@@ -8,11 +8,13 @@ import 'package:http/http.dart';
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? baseUrl;
   String endpoint = "api/";
+  //String defUrl = "http://192.168.0.28/:5002/";
+  String defUrl = "http://192.168.0.28:5002/"; // IP adress of your PC/Laptop
 
   BaseProvider(String point) {
     endpoint += point;
-    baseUrl = const String.fromEnvironment("baseUrl",
-        defaultValue: "http://10.0.2.2:5227/");
+    baseUrl = String.fromEnvironment("baseUrl",
+        defaultValue: defUrl);
   }
 
   Future<SearchResult<T>> getPaged({dynamic filter}) async {

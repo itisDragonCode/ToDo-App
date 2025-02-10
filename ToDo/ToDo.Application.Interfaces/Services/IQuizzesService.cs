@@ -7,5 +7,6 @@ namespace ToDo.Application.Interfaces
     {
         Task<PagedList<QuizDto>> GetActiveQuizzes(QuizzesSearchObject quizzesSearchObject, CancellationToken cancellationToken = default);
         Task<string> SeedQuizData(CancellationToken cancellationToken = default);
+        Task<int> GetQuizTotalPoints(int quizId, CancellationToken cancellationToken = default);
     }
 }

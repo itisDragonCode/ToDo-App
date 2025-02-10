@@ -52,6 +52,20 @@ namespace ToDo.Infrastructure
             return activeQuizzes;
         }
 
+        public async Task<int> GetQuizTotalPoints(int quizId, CancellationToken cancellationToken = default)
+        {
+            string sql = """
+                SELECT SUM(QU.Points)
+                FROM Quizzes AS Q
+                INNER JOIN Questions AS QU ON QU.QuizId = Q.Id
+                WHERE Q.Id = @QuizId
+                """;
+
+            var quizTotalPoints = await DbConnection.QuerySingleOrDefaultAsync<int>(sql, new { QuizId = quizId});
+           
+            return quizTotalPoints;
+        }
+
         public async Task<string> SeedQuizData(CancellationToken cancellationToken = default)
         {
             var quizCount = await DbSet.CountAsync(cancellationToken);

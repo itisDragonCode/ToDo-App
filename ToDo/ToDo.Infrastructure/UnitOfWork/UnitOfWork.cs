@@ -15,9 +15,10 @@ namespace ToDo.Infrastructure
         public readonly IQuizzesRepository QuizsRepository;
         public readonly IQuestionsRepository QuestionsRepository;
         public readonly IAnswersRepository AnswersRepository;
+        public readonly IUserQuizsRepository UserQuizsRepository;
 
         public UnitOfWork(
-            DatabaseContext databaseContext, IToDoItemsRepository toDoItemsRepository, ICountriesRepository countriesRepository, IPhotosRepository photosRepository, IUsersRepository usersRepository, IQuizzesRepository quizsRepository, IQuestionsRepository questionsRepository, IAnswersRepository answersRepository)
+            DatabaseContext databaseContext, IToDoItemsRepository toDoItemsRepository, ICountriesRepository countriesRepository, IPhotosRepository photosRepository, IUsersRepository usersRepository, IQuizzesRepository quizsRepository, IQuestionsRepository questionsRepository, IAnswersRepository answersRepository, IUserQuizsRepository userQuizsRepository)
         {
             _databaseContext = databaseContext;
 
@@ -28,6 +29,7 @@ namespace ToDo.Infrastructure
             QuizsRepository = quizsRepository;
             QuestionsRepository = questionsRepository;
             AnswersRepository = answersRepository;
+            UserQuizsRepository = userQuizsRepository;
         }
 
         public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
